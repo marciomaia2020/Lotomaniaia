@@ -1,1 +1,1 @@
-# Lotomaniaia
+# Lotomania
