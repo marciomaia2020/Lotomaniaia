@@ -32,8 +32,8 @@ function generateNumbers() {
         }
     }
 
-    if (fixedNumbers.length > 20) {
-        alert("Por favor, insira no máximo 20 números fixos.");
+    if (fixedNumbers.length < 20) {
+        alert("Por favor, insira 20 números fixos.");
         return;
     }
 
@@ -41,7 +41,7 @@ function generateNumbers() {
     const availableNumbers = allNumbers.filter(num => !fixedNumbers.includes(num));
     const randomNumbers = [];
 
-    while (randomNumbers.length < (50 - fixedNumbers.length)) {
+    while (randomNumbers.length < 80) {
         const randomIndex = Math.floor(Math.random() * availableNumbers.length);
         const number = availableNumbers.splice(randomIndex, 1)[0];
         randomNumbers.push(number);
