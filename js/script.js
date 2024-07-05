@@ -41,7 +41,8 @@ function generateNumbers() {
     const availableNumbers = allNumbers.filter(num => !fixedNumbers.includes(num));
     const randomNumbers = [];
 
-    while (randomNumbers.length < 80) {
+    // Generate 30 additional random numbers
+    while (randomNumbers.length < 30) {
         const randomIndex = Math.floor(Math.random() * availableNumbers.length);
         const number = availableNumbers.splice(randomIndex, 1)[0];
         randomNumbers.push(number);
@@ -50,6 +51,7 @@ function generateNumbers() {
     const generatedNumbers = [...fixedNumbers, ...randomNumbers].sort((a, b) => a - b);
     document.getElementById('generated-numbers').innerText = `Números Gerados: ${generatedNumbers.join(', ')}`;
 }
+
 
 function saveGame() {
     const generatedText = document.getElementById('generated-numbers').innerText;
