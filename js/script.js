@@ -1,5 +1,24 @@
-// script.js
+
 let savedGames = [];
+
+function validateDuplicateNumbers() {
+    const fixedNumbers = [];
+    const fixedNumbersDiv = document.getElementById('fixed-numbers');
+    const inputs = fixedNumbersDiv.getElementsByTagName('input');
+
+    for (let input of inputs) {
+        if (input.value !== '') {
+            const value = parseInt(input.value);
+            if (fixedNumbers.includes(value)) {
+                alert(`Número duplicado detectado: ${value}. Por favor, insira um número diferente.`);
+                input.value = '';
+                return false;
+            }
+            fixedNumbers.push(value);
+        }
+    }
+    return true;
+}
 
 function addFixedNumberInput() {
     const fixedNumbersDiv = document.getElementById('fixed-numbers');
@@ -11,6 +30,7 @@ function addFixedNumberInput() {
         newInput.id = `fixed-number-${currentInputs + 1}`;
         newInput.min = 0;
         newInput.max = 99;
+        newInput.onchange = validateDuplicateNumbers;
 
         const newLabel = document.createElement('label');
         newLabel.for = newInput.id;
@@ -24,6 +44,10 @@ function addFixedNumberInput() {
 }
 
 function generateNumbers() {
+    if (!validateDuplicateNumbers()) {
+        return;
+    }
+
     const fixedNumbers = [];
     for (let i = 1; i <= 20; i++) {
         const fixedNumberInput = document.getElementById(`fixed-number-${i}`);
@@ -51,7 +75,6 @@ function generateNumbers() {
     const generatedNumbers = [...fixedNumbers, ...randomNumbers].sort((a, b) => a - b);
     document.getElementById('generated-numbers').innerText = `Números Gerados: ${generatedNumbers.join(', ')}`;
 }
-
 
 function saveGame() {
     const generatedText = document.getElementById('generated-numbers').innerText;
